@@ -5,7 +5,8 @@ services:
       context: .
     env_file: envs/.env
     restart: always
-    command: sh -c "gunicorn developers_today.wsgi -b 0.0.0.0:8000"
+    command: sh -c "python manage.py migrate
+                    gunicorn developers_today.wsgi -b 0.0.0.0:8000"
     depends_on:
      - db
     environment:
