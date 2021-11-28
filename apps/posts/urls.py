@@ -5,11 +5,11 @@ from apps.posts.views import PostViewSet, SetVoteAPIView, CommentCreateAPIView
 
 router = DefaultRouter()
 
-router.register('', PostViewSet, basename='posts')
+router.register("", PostViewSet, basename="posts")
 
 urlpatterns = [
-    path('vote/', SetVoteAPIView.as_view(), name='vote'),
-    path('comment/', CommentCreateAPIView.as_view(), name='comments')
+    path("vote/", SetVoteAPIView.as_view(), name="vote"),
+    path("comment/", CommentCreateAPIView.as_view(), name="comments"),
 ]
 
 urlpatterns += router.urls

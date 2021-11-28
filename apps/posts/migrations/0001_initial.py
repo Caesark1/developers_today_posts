@@ -15,39 +15,104 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name="Post",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255, unique=True, verbose_name='Title')),
-                ('link', models.SlugField(verbose_name='Link for post')),
-                ('creation_date', models.DateTimeField(auto_now_add=True)),
-                ('votes_count', models.PositiveIntegerField(default=0, verbose_name='Vote counts')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='posts', to=settings.AUTH_USER_MODEL, verbose_name='User that has created this post')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(max_length=255, unique=True, verbose_name="Title"),
+                ),
+                ("link", models.SlugField(verbose_name="Link for post")),
+                ("creation_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "votes_count",
+                    models.PositiveIntegerField(default=0, verbose_name="Vote counts"),
+                ),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="posts",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="User that has created this post",
+                    ),
+                ),
             ],
             options={
-                'ordering': ('votes_count',),
+                "ordering": ("votes_count",),
             },
         ),
         migrations.CreateModel(
-            name='Vote',
+            name="Vote",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('voted', models.BooleanField(default=True, verbose_name='Voted')),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='votes', to='posts.post', verbose_name='Post')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='votes', to=settings.AUTH_USER_MODEL, verbose_name='User')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("voted", models.BooleanField(default=True, verbose_name="Voted")),
+                (
+                    "post",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="votes",
+                        to="posts.post",
+                        verbose_name="Post",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="votes",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="User",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('comment_author', models.CharField(max_length=100, verbose_name='Author of comment')),
-                ('text', models.TextField(verbose_name="Comments' text")),
-                ('creation_date', models.DateTimeField(auto_now_add=True)),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='posts.post', verbose_name='Posts')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "comment_author",
+                    models.CharField(max_length=100, verbose_name="Author of comment"),
+                ),
+                ("text", models.TextField(verbose_name="Comments' text")),
+                ("creation_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "post",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="comments",
+                        to="posts.post",
+                        verbose_name="Posts",
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-creation_date',),
+                "ordering": ("-creation_date",),
             },
         ),
     ]
